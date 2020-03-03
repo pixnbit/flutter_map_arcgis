@@ -5,14 +5,14 @@ author: Khan Khulgun Team
 homepage: https://github.com/munkh-altai/flutter_map_arcgis
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_map: any # or the latest version on Pub
-  dio: 3.0.8 #latest version
-  image_downloader: 0.19.1
+  dio: 3.0.9 #latest version
+  image_downloader: ^0.19.1
   easy_permission_validator: any
   permission_handler: any
   local_image_provider: any
@@ -20,11 +20,11 @@ dependencies:
   flutter_range_slider: any
   awesome_dialog: any
   shared_preferences: any
-  path_provider: ^1.1.0
-  http: ^0.12.0+2
-  archive: ^2.0.8
-  percent_indicator: "^2.1.1"
-  flutter_form_builder: 3.7.3
+  path_provider: ^1.6.4
+  http: ^0.12.0+4
+  archive: ^2.0.11
+  percent_indicator: ^2.1.1+1
+  flutter_form_builder: ^3.8.0+1
 
 dev_dependencies:
   flutter_test:
