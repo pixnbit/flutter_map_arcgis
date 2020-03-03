@@ -272,7 +272,6 @@ class _FeatureLayerState extends State<FeatureLayer> {
         }
         for (var feature in jsonData["features"]) {
           if (widget.options.geometryType == "point") {
-
             features_.add(Marker(
               width: widget.options.marker.width,
               height: widget.options.marker.height,
@@ -293,20 +292,22 @@ class _FeatureLayerState extends State<FeatureLayer> {
             } else {
               polygonOptions = widget.options.polygonOptions;
             }
-            for (var ring in feature["geometry"]["rings"]) {
-              var points = <LatLng>[];
-              for (var point_ in ring) {
-                points.add(LatLng(point_[1].toDouble(), point_[0].toDouble()));
-              }
+            if (polygonOptions != null) {
+              for (var ring in feature["geometry"]["rings"]) {
+                var points = <LatLng>[];
+                for (var point_ in ring) {
+                  points.add(LatLng(point_[1].toDouble(), point_[0].toDouble()));
+                }
 
-              features_.add(PolygonEsri(
-                points: points,
-                borderStrokeWidth: polygonOptions.borderStrokeWidth,
-                color: polygonOptions.color,
-                borderColor: polygonOptions.borderColor,
-                isDotted: polygonOptions.isDotted,
-                attributes: feature["attributes"],
-              ));
+                features_.add(PolygonEsri(
+                  points: points,
+                  borderStrokeWidth: polygonOptions.borderStrokeWidth,
+                  color: polygonOptions.color,
+                  borderColor: polygonOptions.borderColor,
+                  isDotted: polygonOptions.isDotted,
+                  attributes: feature["attributes"],
+                ));
+              }
             }
           }
         }
