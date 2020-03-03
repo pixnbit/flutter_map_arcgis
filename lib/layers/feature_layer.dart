@@ -267,6 +267,9 @@ class _FeatureLayerState extends State<FeatureLayer> {
 
 
       if(jsonData["features"] != null){
+        if (widget.options.onFeatures != null) {
+          widget.options.onFeatures(jsonData["features"]);
+        }
         for (var feature in jsonData["features"]) {
           if (widget.options.geometryType == "point") {
 
@@ -284,20 +287,27 @@ class _FeatureLayerState extends State<FeatureLayer> {
                   )),
             ));
           } else if (widget.options.geometryType == "polygon") {
-            var points = <LatLng>[];
-
-            for (var point_ in feature["geometry"]["rings"][0]) {
-              points.add(LatLng(point_[1].toDouble(), point_[0].toDouble()));
+            PolygonOptions polygonOptions;
+            if (widget.options.polygonOptionsByAttributes != null) {
+              polygonOptions = widget.options.polygonOptionsByAttributes(feature["attributes"]);
+            } else {
+              polygonOptions = widget.options.polygonOptions;
             }
+            for (var ring in feature["geometry"]["rings"]) {
+              var points = <LatLng>[];
+              for (var point_ in ring) {
+                points.add(LatLng(point_[1].toDouble(), point_[0].toDouble()));
+              }
 
-            features_.add(PolygonEsri(
-              points: points,
-              borderStrokeWidth: widget.options.polygonOptions.borderStrokeWidth,
-              color: widget.options.polygonOptions.color,
-              borderColor: widget.options.polygonOptions.borderColor,
-              isDotted: widget.options.polygonOptions.isDotted,
-              attributes: feature["attributes"],
-            ));
+              features_.add(PolygonEsri(
+                points: points,
+                borderStrokeWidth: polygonOptions.borderStrokeWidth,
+                color: polygonOptions.color,
+                borderColor: polygonOptions.borderColor,
+                isDotted: polygonOptions.isDotted,
+                attributes: feature["attributes"],
+              ));
+            }
           }
         }
 

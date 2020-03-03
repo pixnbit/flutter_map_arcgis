@@ -97,6 +97,9 @@ class FeatureLayerOptions extends LayerOptions {
 
   /// Function to call when a Marker is tapped
   final void Function(dynamic attributes, LatLng location) onTap;
+  final void Function(dynamic allFeatures) onFeatures;
+
+  final PolygonOptions Function(dynamic attributes) polygonOptionsByAttributes;
 
   FeatureLayerOptions({
     @required this.url,
@@ -118,5 +121,7 @@ class FeatureLayerOptions extends LayerOptions {
     this.polygonOptions = const PolygonOptions(),
     this.showPolygon = true,
     this.onTap,
+    this.polygonOptionsByAttributes,
+    this.onFeatures,
   });
 }
