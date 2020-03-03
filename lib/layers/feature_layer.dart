@@ -330,8 +330,6 @@ class _FeatureLayerState extends State<FeatureLayer> {
       if (isInclude) {
 
         widget.options.onTap(polygon.attributes, position);
-      } else {
-        widget.options.onTap(null, position);
       }
     }
   }
